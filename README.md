@@ -23,9 +23,13 @@ to the require section of your application's `composer.json` file.
 Usage
 -----
 Example:
+
+![demo](https://cloud.githubusercontent.com/assets/3985601/4497539/fb54bd70-4a6f-11e4-89a3-7c96c9fd9f0e.jpg)
 ```
 <?php
 use \fruppel\googlecharts\GoogleCharts;
+...
+?>
 
 <?= GoogleCharts::widget([
 	'id' => 'my-id',
