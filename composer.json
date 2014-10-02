@@ -1,0 +1,21 @@
+{
+    "name": "fruppel/yii2-googlecharts",
+    "description": "Google Charts widget for Yii2.",
+    "keywords": ["yii", "extension", "widget", "google charts", "chart"],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Florian Ruppel",
+            "email": "ruppel.florian@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "fruppel\\googlecharts\\": ""
+        }
+    }
+}
