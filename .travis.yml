@@ -8,4 +8,6 @@ before_script:
   - composer global require "fxp/composer-asset-plugin:1.0.0-beta2"
   - composer create-project --stability=dev --prefer-dist yiisoft/yii2-app-basic basic
   - cd basic
-
+  - composer require "fruppel/yii2-googlecharts" "*"
+  - composer update
+  
