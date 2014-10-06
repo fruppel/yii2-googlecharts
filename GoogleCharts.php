@@ -20,6 +20,19 @@ class GoogleCharts extends Widget
 	public $data = [];
 
 	/**
+	 * @var array $dataArray Data, will be transformed to DataTable
+	 * Example:
+	 * [
+	 *  ['Year', 'Sales', 'Expenses'],
+	 *  ['2013',  1000,      400],
+	 *  ['2014',  1170,      460],
+	 *  ['2015',  660,       1120],
+	 *  ['2016',  1030,      540]
+	 * ]
+	 */
+	public $dataArray = [];
+
+	/**
 	 * @var array $options Additional configuration options
 	 */
 	public $options = [];
@@ -57,6 +70,10 @@ class GoogleCharts extends Widget
 			throw new InvalidConfigException("'visualization' needs to be set, e.g. 'PieChart' or 'BarChart'");
 		}
 
+		if (empty($this->data) && empty($this->dataArray)) {
+			throw new InvalidConfigException("Either 'data' or 'dataArray' needs to be set");
+		}
+
 		if ($this->responsive) {
 			$this->options['width'] = '100%';
 		}
@@ -79,26 +96,38 @@ class GoogleCharts extends Widget
 	{
 		$view = $this->getView();
 		$view->registerJsFile('https://www.google.com/jsapi', ['position' => View::POS_HEAD]);
+
+		$functionName = 'drawChart_' .  str_replace('-', '', $this->getId());
 		$js = "
 			google.load('visualization', '" . $this->version . "', {'packages':['" . $this->packages . "']});
-			google.setOnLoadCallback(drawChart);
+			google.setOnLoadCallback(" . $functionName . ");
 
-			function drawChart() {
-		      // Create the data table.
-		      var data = new google.visualization.DataTable(JSON.parse('" . $this->data . "'));
+			function " . $functionName . "() {";
 
-		      // Set chart options
-		      var options = " . $this->options . ";
+		if (!empty($this->dataArray))
+		{
+			$js .= "
+				var data = google.visualization.arrayToDataTable(JSON.parse('" . json_encode($this->dataArray) . "'));
+				";
+		}
+		else
+		{
+			$js .= "
+				var	data = new google.visualization.DataTable(JSON.parse('" . $this->data . "'));
+				";
+		}
 
-		      // Instantiate and draw our chart, passing in some options.
-		      var chart = new google.visualization." . $this->visualization . "(document.getElementById('googlechart_". $this->getId() . "'));
-		      chart.draw(data, options);
+		$js .= "
+	            var options = " . $this->options . ";
+			    var chart = new google.visualization." . $this->visualization . "(document.getElementById('googlechart_". $this->getId() . "'));
+		        chart.draw(data, options);
 			}";
 
 		$view->registerJs($js, View::POS_HEAD);
 
 		if ($this->responsive) {
-			$view->registerJs("$(window).resize(drawChart)", View::POS_END);
+			$view->registerJs("$(window).resize(" . $functionName . ")", View::POS_END);
 		}
 	}
+
 }
