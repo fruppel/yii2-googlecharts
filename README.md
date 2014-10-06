@@ -1,7 +1,7 @@
-yii2-googlecharts
+Google Charts widget for Yii2
 =================
 
-Google Charts widget for Yii2 (see https://developers.google.com/chart/)
+A wrapper for Google's charts API (see https://developers.google.com/chart/) to use it with Yii2.
 
 Installation
 ------------
@@ -22,7 +22,7 @@ to the require section of your application's `composer.json` file.
 
 Usage
 -----
-Example:
+Example 1: 3D PieChart with data in DataTable format
 
 ![demo](https://cloud.githubusercontent.com/assets/3985601/4497539/fb54bd70-4a6f-11e4-89a3-7c96c9fd9f0e.jpg)
 ```
@@ -88,4 +88,37 @@ use \fruppel\googlecharts\GoogleCharts;
     ],
     'responsive' => true,
 ]) ?>
+```
+
+Example 2: AreaChart with data array (will be converted to DataTable) 
+
+![demo2](https://cloud.githubusercontent.com/assets/3985601/4530310/b1ce75fc-4d7f-11e4-923f-79500c7df15b.jpg)
+```
+<?php
+use \fruppel\googlecharts\GoogleCharts;
+...
+<?= GoogleCharts::widget([
+	'visualization' => 'AreaChart',
+		'options' => [
+			'title' => 'Company Performance',
+			'hAxis' => [
+				'title' => 'Year',
+				'titleTextStyle' => [
+					'color' => '#333'
+				]
+			],
+			'vAxis' => [
+				'minValue' => 0
+			]
+		],
+	'dataArray' => [
+	        ['Year', 'Sales', 'Expenses'],
+	        ['2013',  1000,      400],
+	        ['2014',  1170,      460],
+	        ['2015',  660,       1120],
+	        ['2016',  1030,      540]
+	]
+]) ?>
+?>
+
 ```
