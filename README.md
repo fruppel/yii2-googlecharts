@@ -118,7 +118,7 @@ use \fruppel\googlecharts\GoogleCharts;
 	        ['2015',  660,       1120],
 	        ['2016',  1030,      540]
 	]
-]) ?>
+])
 ?>
 
 ```
