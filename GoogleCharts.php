@@ -107,13 +107,13 @@ class GoogleCharts extends Widget
 		if (!empty($this->dataArray))
 		{
 			$js .= "
-				var data = google.visualization.arrayToDataTable(JSON.parse('" . json_encode($this->dataArray) . "'));
+				var data = google.visualization.arrayToDataTable(" . json_encode($this->dataArray) . ");
 				";
 		}
 		else
 		{
 			$js .= "
-				var	data = new google.visualization.DataTable(JSON.parse('" . $this->data . "'));
+				var	data = new google.visualization.DataTable(" . json_encode($this->data) . ");
 				";
 		}
 
