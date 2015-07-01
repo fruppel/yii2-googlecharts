@@ -1,5 +1,5 @@
 {
-    "name": "sebathi/yii2-googlecharts",
+    "name": "fruppel/yii2-googlecharts",
     "description": "Google Charts widget for Yii2.",
     "keywords": ["yii", "extension", "widget", "google charts", "chart"],
     "type": "yii2-extension",
