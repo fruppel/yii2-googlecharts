@@ -2,6 +2,9 @@ language: php
 php:
   - "5.5"
   - "5.4"
+
+# faster builds on new travis setup not using sudo
+sudo: false
   
 before_script:
   - composer self-update
