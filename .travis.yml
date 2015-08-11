@@ -10,4 +10,3 @@ before_script:
   - cd basic
   - composer require "fruppel/yii2-googlecharts" "*"
   - composer update
-  
