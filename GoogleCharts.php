@@ -1,5 +1,4 @@
 <?php
-
 namespace fruppel\googlecharts;
 
 use Yii;
