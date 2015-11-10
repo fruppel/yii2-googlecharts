@@ -58,6 +58,12 @@ class GoogleCharts extends Widget
 	 * classes and functions.
 	 */
 	public $visualization = '';
+	
+	/**
+	 * @var bool $asPng Set it to true and chart will be rendered as PNG. Please note that this is currently only
+	 * possible for core charts and geocharts.
+	 */
+	public $asPng = false;
 
 	/**
 	 * @throws InvalidConfigException
@@ -112,16 +118,26 @@ class GoogleCharts extends Widget
 		else
 		{
 			$js .= "
-				var	data = new google.visualization.DataTable(" . json_encode($this->data) . ");
-				";
+				var	data = new google.visualization.DataTable(" . json_encode($this->data) . ");";
 		}
 
 		$js .= "
+				var chart_div = document.getElementById('googlechart_". $this->getId() . "');
 	            var options = " . $this->options . ";
-			    var chart = new google.visualization." . $this->visualization . "(document.getElementById('googlechart_". $this->getId() . "'));
+			    var chart = new google.visualization." . $this->visualization . "(chart_div);";
+		
+		if ($this->asPng)
+		{
+			$js .= "
+				google.visualization.events.addListener(chart, 'ready', function ()      {
+					chart_div.innerHTML = '<img src=\"' + chart.getImageURI() + '\">';
+				});";
+		}
+		
+		$js .= "
 		        chart.draw(data, options);
 			}";
-
+			
 		$view->registerJs($js, View::POS_HEAD);
 
 		if ($this->responsive) {
