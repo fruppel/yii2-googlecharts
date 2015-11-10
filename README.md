@@ -122,3 +122,14 @@ use \fruppel\googlecharts\GoogleCharts;
 ?>
 
 ```
+
+Render charts as png image
+--------------------------
+Set the $asPng option to true like the example below
+```
+<?= GoogleCharts::widget([
+	'asPng' => true,
+	...
+```
+Note: This works currently only for core charts and geocharts.
+See the charts documentation for more information: https://developers.google.com/chart/interactive/docs/printing
