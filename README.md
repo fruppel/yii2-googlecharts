@@ -7,18 +7,10 @@ Installation
 ------------
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Either run
-
 ```
-php composer.phar require "fruppel/yii2-googlecharts" "*"
-```
-or add
-
-```json
-"fruppel/yii2-googlecharts" : "*"
+composer require fruppel/yii2-googlecharts
 ```
 
-to the require section of your application's `composer.json` file.
 
 Usage
 -----

@@ -100,7 +100,7 @@ class GoogleCharts extends Widget
 	protected function registerAssets()
 	{
 		$view = $this->getView();
-		$view->registerJsFile('https://www.google.com/jsapi', ['position' => View::POS_HEAD]);
+		$view->registerJsFile('https://www.gstatic.com/charts/loader.js', ['position' => View::POS_HEAD]);
 
 		$functionName = 'drawChart_' .  str_replace('-', '', $this->getId());
 		$js = "
